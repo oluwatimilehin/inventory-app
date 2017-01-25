@@ -18,9 +18,11 @@ public class StoreContract {
         public static final Uri INVENTORY_URI = Uri.withAppendedPath(BASE_CONTENT_URI,
                 PATH_INVENTORY);
         public static final String TABLE_NAME = "inventory";
+        public static final String COLUMN_ID = BaseColumns._ID;
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_QUANTITY = "quantity";
+        public static final String COLUMN_SUPPLIER = "supplier";
         public static final String COLUMN_IMAGE = "image";
     }
 }
