@@ -8,7 +8,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+
 import com.oluwatimilehin.myinventory.data.StoreContract.StoreEntry;
+
 /**
  * Created by timad on 25/01/2017.
  */
@@ -65,7 +67,19 @@ public class StoreProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case ITEMS:
+                SQLiteDatabase db = mStoreDbHelper.getWritableDatabase();
+                Long id = db.insert(StoreEntry.TABLE_NAME, null, contentValues);
+                if (id == -1) {
+                    return null;
+                }
+                return ContentUris.withAppendedId(uri, id);
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     @Override
